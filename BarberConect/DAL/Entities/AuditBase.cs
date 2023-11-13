@@ -6,7 +6,7 @@ namespace BarberConect.DAL.Entities
     {
         [Key] //DataAnnotation
         [Required] //doesn't allow null fields
-        public virtual Guid ID { get; set; }
+        public virtual Guid Id { get; set; }
         public virtual DateTime? CreateDate { get; set; }
         public virtual DateTime? ModifiedDate { get; set; }
 
