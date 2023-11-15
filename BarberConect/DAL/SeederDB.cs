@@ -1,4 +1,4 @@
-﻿namespace BarberConect.DAL
+﻿/*namespace BarberConect.DAL
 {
     public class SeederDB
     {
@@ -30,6 +30,6 @@
             }
         }
             #endregion
-*/
+
     }
-}
+}*/

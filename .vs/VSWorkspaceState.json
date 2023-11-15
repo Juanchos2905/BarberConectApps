@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\BarberConect",
+    "\\BarberConect\\Controllers",
+    "\\BarberConect\\DAL"
   ],
-  "SelectedNode": "\\C:\\BarberConectApps",
+  "SelectedNode": "\\BarberConect\\Controllers\\CustomerController.cs",
   "PreviewInSolutionExplorer": false
 }
