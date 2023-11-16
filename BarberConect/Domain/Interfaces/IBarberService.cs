@@ -5,6 +5,7 @@ namespace BarberConect.Domain.Interfaces
 {
     public interface IBarberService
     {
+        Task<IEnumerable<Barber>> GetBarbersAsync();
         Task<Barber> CreateBarberAsync(Barber barber);
         Task<Barber> EditBarberAsync(Barber barber);
         Task<Barber> GetBarberByIdAsync(Guid id);

@@ -1,13 +1,33 @@
-﻿using BarberConect.DAL.Entities;
+﻿using BarberConect.DAL;
+using BarberConect.DAL.Entities;
 using BarberConect.Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using System.Diagnostics.Metrics;
 
 namespace BarberConect.Domain.Services
 {
     public class BarberService : IBarberService
     {
-        public Task<Barber> CreateBarberAsync(Barber barber)
+        public readonly DataBaseContext _context;
+        public BarberService(DataBaseContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
+        }
+
+        public async Task<Barber> CreateBarberAsync(Barber barber)
+        {
+            try
+            {
+                barber.Id = Guid.NewGuid();
+                barber.CreateDate = DateTime.Now;
+                _context.Barbers.Add(barber);
+                await _context.SaveChangesAsync();
+                return barber;
+            }
+            catch (DbUpdateException dbUpdateException)
+            {
+                throw new Exception(dbUpdateException.InnerException?.Message ?? dbUpdateException.Message);
+            }
         }
 
         public Task<Barber> DeleteBarberAsync(Guid id)
@@ -23,6 +43,11 @@ namespace BarberConect.Domain.Services
         public Task<Barber> GetBarberByIdAsync(Guid id)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<IEnumerable<Barber>> GetBarbersAsync()
+        {
+                return await _context.Barbers.ToListAsync();
         }
     }
 }
