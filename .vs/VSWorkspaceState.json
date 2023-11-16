@@ -3,8 +3,9 @@
     "",
     "\\BarberConect",
     "\\BarberConect\\Controllers",
-    "\\BarberConect\\DAL"
+    "\\BarberConect\\DAL",
+    "\\BarberConect\\DAL\\Entities"
   ],
-  "SelectedNode": "\\BarberConect\\Controllers\\CustomerController.cs",
+  "SelectedNode": "\\BarberConect\\DAL\\Entities\\User.cs",
   "PreviewInSolutionExplorer": false
 }

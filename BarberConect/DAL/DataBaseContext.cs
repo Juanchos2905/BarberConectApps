@@ -1,6 +1,6 @@
 ﻿using BarberConect.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
-//using System.Diagnostics.Metrics;
+using System.Diagnostics.Metrics;
 
 namespace BarberConect.DAL
 {

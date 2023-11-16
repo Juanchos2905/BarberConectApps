@@ -42,14 +42,15 @@ namespace BarberConect.Migrations
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Time")
-                        .HasColumnType("int");
+                    b.Property<string>("Time")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int?>("TotalMinutes")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("TotalRate")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("TotalRate")
+                        .HasColumnType("float");
 
                     b.Property<Guid?>("UserId")
                         .HasColumnType("uniqueidentifier");
@@ -87,8 +88,8 @@ namespace BarberConect.Migrations
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<decimal>("Rate")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("Rate")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 

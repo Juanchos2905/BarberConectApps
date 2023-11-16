@@ -18,7 +18,7 @@ namespace BarberConect.DAL.Entities
         public int? TotalMinutes { get; set; }
         [Display(Name = "TotalPagar")]
         [Required]
-        public decimal TotalRate { get; set; }
+        public double TotalRate { get; set; }
         public ICollection<Service>? Services { get; set; }
         public User? User { get; set; }  
     }

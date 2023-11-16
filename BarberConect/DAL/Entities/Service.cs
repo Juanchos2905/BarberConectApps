@@ -11,7 +11,7 @@ namespace BarberConect.DAL.Entities
         public string BarberService { get; set; }//Varchar(30)
         [Display(Name = "Tarifa")]
         [Required]
-        public decimal Rate { get; set; }
+        public double Rate { get; set; }
         [Display(Name = "TiempoServicio")]
         [Required]
         public int Minutes { get; set; }

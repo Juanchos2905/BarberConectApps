@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BarberConect.Migrations
 {
-    public partial class InitialDb : Migration
+    public partial class initialDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -36,10 +36,10 @@ namespace BarberConect.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Time = table.Column<int>(type: "int", nullable: false),
+                    Time = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     AppointmentStatus = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     TotalMinutes = table.Column<int>(type: "int", nullable: true),
-                    TotalRate = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    TotalRate = table.Column<double>(type: "float", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
@@ -60,7 +60,7 @@ namespace BarberConect.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     BarberService = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    Rate = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Rate = table.Column<double>(type: "float", nullable: false),
                     Minutes = table.Column<int>(type: "int", nullable: false),
                     AppointmentReservationId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: true),

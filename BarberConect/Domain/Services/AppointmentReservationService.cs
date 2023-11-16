@@ -1,13 +1,36 @@
-﻿using BarberConect.DAL.Entities;
+﻿using BarberConect.DAL;
+using BarberConect.DAL.Entities;
 using BarberConect.Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using System.Diagnostics.Metrics;
 
 namespace BarberConect.Domain.Services
 {
     public class AppointmentReservationService : IAppointmentReservationService
     {
-        public Task<AppointmentReservation> CreateAppointmentReservationAsync(AppointmentReservation appointmentReservation)
+        private readonly DataBaseContext _context;
+        
+        public AppointmentReservationService(DataBaseContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
+        }
+
+        public async Task<AppointmentReservation> CreateAppointmentReservationAsync(AppointmentReservation appointmentReservation)
+        {
+            try
+            {
+                appointmentReservation.Id = Guid.NewGuid();
+                appointmentReservation.CreateDate = DateTime.Now;
+
+                _context.AppointmentReservations.Add(appointmentReservation);
+                await _context.SaveChangesAsync();
+
+                return appointmentReservation;
+            }
+            catch (DbUpdateException dbUpdateException)
+            {
+                throw new Exception(dbUpdateException.InnerException?.Message ?? dbUpdateException.Message);
+            }
         }
 
         public Task<AppointmentReservation> DeleteAppointmentReservationAsync(Guid id)
