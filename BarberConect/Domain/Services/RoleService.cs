@@ -12,13 +12,13 @@ namespace BarberConect.Domain.Services
         {
             _context = context;
         }
-        public async Task<Role> GetCustomerByIdAsync(int id)
+        public async Task<Role> GetRoleByIdAsync(int id)
         {
             return await _context.Roles.FirstOrDefaultAsync(r => r.RoleId == id);
             ;
         }
 
-        public async Task<IEnumerable<Role>> GetCustomersAsync()
+        public async Task<IEnumerable<Role>> GetRolesAsync()
         {
             return await _context.Roles.ToListAsync();
         }

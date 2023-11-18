@@ -24,6 +24,7 @@ namespace BarberConect.DAL
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
         //public DbSet<Customer> Customers { get; set; }
+        public DbSet<Service> Services { get; set; }
         public DbSet<AppointmentReservation> AppointmentReservations { get; set; }
     }
 

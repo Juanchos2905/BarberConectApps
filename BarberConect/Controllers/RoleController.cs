@@ -14,12 +14,12 @@ namespace BarberConect.Controllers
         {
             _rolesService = roleService;
         }
-        //GET BARBERS
+        //GET ROLES
         [HttpGet, ActionName("Get")]
         [Route("GetRoles")]
-        public async Task<ActionResult<IEnumerable<Role>>> GetCustomersAsync()
+        public async Task<ActionResult<IEnumerable<Role>>> GetRolesAsync()
         {
-            var roles = await _rolesService.GetCustomersAsync();
+            var roles = await _rolesService.GetRolesAsync();
             if (roles == null || !roles.Any())
             {
                 return NotFound();
@@ -27,14 +27,14 @@ namespace BarberConect.Controllers
 
             return Ok(roles);
         }
-        //GET BARBERS
+        //GET ROLE BY ID
         [HttpGet, ActionName("Get")]
         [Route("GetRolesById")]
-        public async Task<ActionResult<IEnumerable<Role>>> GetCustomerByIdAsync(int id)
+        public async Task<ActionResult<IEnumerable<Role>>> GetRoleByIdAsync(int id)
         {
             if (id == null) return BadRequest("Id es requerido!");
 
-            var roles = await _rolesService.GetCustomerByIdAsync(id);
+            var roles = await _rolesService.GetRoleByIdAsync(id);
             if (roles == null)
             {
                 return NotFound();
