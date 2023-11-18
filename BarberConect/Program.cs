@@ -12,8 +12,8 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<DataBaseContext>(o => o.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 //
 builder.Services.AddScoped<IBarberService, BarberService>();
-builder.Services.AddScoped<ICustomerService, CustomerService>();
-builder.Services.AddScoped<IAppointmentReservationService, AppointmentReservationService>();
+//builder.Services.AddScoped<IUse2rService, CustomerService>();
+//builder.Services.AddScoped<IAppointmentReservationService, AppointmentReservationService>();
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

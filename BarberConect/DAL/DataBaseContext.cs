@@ -12,8 +12,8 @@ namespace BarberConect.DAL
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Barber>().HasIndex(b => b.Id).IsUnique();
-            modelBuilder.Entity<Customer>().HasIndex(c => c.Id).IsUnique();
+            modelBuilder.Entity<User>().HasIndex(u => u.Id).IsUnique();
+
             modelBuilder.Entity<AppointmentReservation>().HasIndex("Date", "Time", "AppointmentStatus").IsUnique();
 
             ///modelBuilder.Entity<Hotel>().HasIndex(h => h.Name).IsUnique();
@@ -21,9 +21,9 @@ namespace BarberConect.DAL
 
         }
         //DBset!
-        public DbSet<Barber> Barbers { get; set; }
-        public DbSet<Customer> Customers { get; set; }
-        public DbSet<AppointmentReservation> AppointmentReservations { get; set; }
+        public DbSet<User> Users { get; set; }
+        //public DbSet<Customer> Customers { get; set; }
+        //public DbSet<AppointmentReservation> AppointmentReservations { get; set; }
     }
 
 

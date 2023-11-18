@@ -18,7 +18,7 @@ namespace BarberConect.Controllers
         //GET BARBERS
         [HttpGet, ActionName("Get")]
         [Route("GetBarbers")]
-        public async Task<ActionResult<IEnumerable<Barber>>> GetBarbersAsync()
+        public async Task<ActionResult<IEnumerable<User>>> GetBarbersAsync()
         {
             var barbers = await _barberService.GetBarbersAsync();
             if (barbers == null || !barbers.Any())
@@ -31,7 +31,7 @@ namespace BarberConect.Controllers
         //CREATE BARBER 
         [HttpPost, ActionName("Create")]
         [Route("CreateBarber")]
-        public async Task<ActionResult> CreateBarberAsync(Barber barber)
+        public async Task<ActionResult> CreateBarberAsync(User barber)
         {
             try
             {

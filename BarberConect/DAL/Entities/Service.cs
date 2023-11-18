@@ -15,7 +15,7 @@ namespace BarberConect.DAL.Entities
         [Display(Name = "TiempoServicio")]
         [Required]
         public int Minutes { get; set; }
-        public AppointmentReservation? AppointmentReservation{ get; set; }
+        public Guid AppointmentReservationId{ get; set; } //FK
 
 
     }

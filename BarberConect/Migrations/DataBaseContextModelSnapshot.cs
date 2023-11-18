@@ -42,9 +42,13 @@ namespace BarberConect.Migrations
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<Guid>("ServiceId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Time")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int?>("TotalMinutes")
                         .HasColumnType("int");
@@ -52,17 +56,15 @@ namespace BarberConect.Migrations
                     b.Property<double>("TotalRate")
                         .HasColumnType("float");
 
-                    b.Property<Guid?>("UserId")
+                    b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
-
                     b.HasIndex("Date", "Time", "AppointmentStatus")
                         .IsUnique();
 
-                    b.ToTable("AppointmentReservations");
+                    b.ToTable("AppointmentReservation");
                 });
 
             modelBuilder.Entity("BarberConect.DAL.Entities.Service", b =>
@@ -71,7 +73,7 @@ namespace BarberConect.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("AppointmentReservationId")
+                    b.Property<Guid>("AppointmentReservationId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("BarberService")
@@ -107,12 +109,11 @@ namespace BarberConect.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
+                    b.Property<Guid>("AppointmentReservationId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime?>("CreateDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -136,68 +137,41 @@ namespace BarberConect.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<int>("Phone")
+                        .HasMaxLength(50)
+                        .HasColumnType("int");
+
+                    b.Property<int>("Role")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Skill")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
                     b.HasKey("Id");
 
-                    b.ToTable("User");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("User");
-                });
-
-            modelBuilder.Entity("BarberConect.DAL.Entities.Barber", b =>
-                {
-                    b.HasBaseType("BarberConect.DAL.Entities.User");
-
-                    b.Property<string>("Habilidades")
-                        .IsRequired()
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
-
                     b.HasIndex("Id")
                         .IsUnique();
 
-                    b.HasDiscriminator().HasValue("Barber");
-                });
-
-            modelBuilder.Entity("BarberConect.DAL.Entities.Customer", b =>
-                {
-                    b.HasBaseType("BarberConect.DAL.Entities.User");
-
-                    b.Property<string>("Phone")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.HasIndex("Id")
-                        .IsUnique();
-
-                    b.HasDiscriminator().HasValue("Customer");
-                });
-
-            modelBuilder.Entity("BarberConect.DAL.Entities.AppointmentReservation", b =>
-                {
-                    b.HasOne("BarberConect.DAL.Entities.User", "User")
-                        .WithMany("appointmentReservations")
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("User");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("BarberConect.DAL.Entities.Service", b =>
                 {
-                    b.HasOne("BarberConect.DAL.Entities.AppointmentReservation", "AppointmentReservation")
+                    b.HasOne("BarberConect.DAL.Entities.AppointmentReservation", null)
                         .WithMany("Services")
-                        .HasForeignKey("AppointmentReservationId");
-
-                    b.Navigation("AppointmentReservation");
+                        .HasForeignKey("AppointmentReservationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("BarberConect.DAL.Entities.AppointmentReservation", b =>
                 {
                     b.Navigation("Services");
-                });
-
-            modelBuilder.Entity("BarberConect.DAL.Entities.User", b =>
-                {
-                    b.Navigation("appointmentReservations");
                 });
 #pragma warning restore 612, 618
         }

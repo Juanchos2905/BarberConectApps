@@ -14,13 +14,13 @@ namespace BarberConect.Domain.Services
             _context = context;
         }
 
-        public async Task<Barber> CreateBarberAsync(Barber barber)
+        public async Task<User> CreateBarberAsync(User barber)
         {
             try
             {
                 barber.Id = Guid.NewGuid();
                 barber.CreateDate = DateTime.Now;
-                _context.Barbers.Add(barber);
+                _context.Users.Add(barber);
                 await _context.SaveChangesAsync();
                 return barber;
             }
@@ -30,24 +30,26 @@ namespace BarberConect.Domain.Services
             }
         }
 
-        public Task<Barber> DeleteBarberAsync(Guid id)
+        public Task<User> DeleteBarberAsync(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Barber> EditBarberAsync(Barber barber)
+        public Task<User> EditBarberAsync(User barber)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Barber> GetBarberByIdAsync(Guid id)
+        public Task<User> GetBarberByIdAsync(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<Barber>> GetBarbersAsync()
+        public async Task<IEnumerable<User>> GetBarbersAsync()
         {
-                return await _context.Barbers.ToListAsync();
+                return await _context.Users
+                .Where(u => u.RoleId == 1)
+                .ToListAsync();
         }
     }
 }

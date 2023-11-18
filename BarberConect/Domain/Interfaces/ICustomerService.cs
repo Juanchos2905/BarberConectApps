@@ -4,9 +4,10 @@ namespace BarberConect.Domain.Interfaces
 {
     public interface ICustomerService
     {
-        Task<Customer> CreateCustomerAsync(Customer customer);
-        Task<Customer> EditCustomerAsync(Customer customer);
-        Task<Customer> GetCustomerByIdAsync(Guid id);
-        Task<Customer> DeleteCustomerAsync(Guid id);
+        Task<IEnumerable<User>> GetCustomersAsync();
+        Task<User> CreateCustomerAsync(User customer);
+        Task<User> EditCustomerAsync(User customer);
+        Task<User> GetCustomerByIdAsync(Guid id);
+        Task<User> DeleteCustomerAsync(Guid id);
     }
 }

@@ -9,6 +9,12 @@ namespace BarberConect.DAL.Entities
         [MaxLength(50)]
         public string Name { get; set; }
 
+        [MaxLength(50)]
+        public string? LastName { get; set; }
+
+        [Required]
+        public int Role { get; set; }
+
         [Required]
         [MaxLength(50, ErrorMessage = "El campo {0} debe tener maximo{1} caracter")]
         public string Email { get; set; }
@@ -17,11 +23,19 @@ namespace BarberConect.DAL.Entities
         [MaxLength(50)]
         public string Password { get; set; }
 
-        [MaxLength(50)]
-        public string? LastName { get; set; }
 
         [Required]
         public int Age { get; set; }
-        public ICollection<AppointmentReservation>? appointmentReservations { get; set; }
+
+        [MaxLength(50)]
+        public int Phone { get; set; }
+
+        [MaxLength(100)]
+        public string Skill { get; set; }
+
+
+        public Guid AppointmentReservationId { get; set; } //FK
+        public int RoleId { get; set; } //FK
+
     }
 }
