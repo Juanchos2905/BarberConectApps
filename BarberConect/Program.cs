@@ -12,7 +12,7 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<DataBaseContext>(o => o.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 //
 builder.Services.AddScoped<IBarberService, BarberService>();
-//builder.Services.AddScoped<IUse2rService, CustomerService>();
+builder.Services.AddScoped<IRoleService, RoleService>();
 //builder.Services.AddScoped<IAppointmentReservationService, AppointmentReservationService>();
 
 

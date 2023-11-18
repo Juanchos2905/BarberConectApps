@@ -67,6 +67,27 @@ namespace BarberConect.Migrations
                     b.ToTable("AppointmentReservation");
                 });
 
+            modelBuilder.Entity("BarberConect.DAL.Entities.Role", b =>
+                {
+                    b.Property<int>("RoleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoleId"), 1L, 1);
+
+                    b.Property<string>("RoleName")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.HasKey("RoleId");
+
+                    b.HasIndex("RoleId")
+                        .IsUnique();
+
+                    b.ToTable("Roles");
+                });
+
             modelBuilder.Entity("BarberConect.DAL.Entities.Service", b =>
                 {
                     b.Property<Guid>("Id")

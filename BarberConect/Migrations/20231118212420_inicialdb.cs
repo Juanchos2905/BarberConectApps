@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BarberConect.Migrations
 {
-    public partial class iniDb : Migration
+    public partial class inicialdb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -27,6 +27,19 @@ namespace BarberConect.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AppointmentReservation", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Roles",
+                columns: table => new
+                {
+                    RoleId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RoleName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Roles", x => x.RoleId);
                 });
 
             migrationBuilder.CreateTable(
@@ -82,6 +95,12 @@ namespace BarberConect.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Roles_RoleId",
+                table: "Roles",
+                column: "RoleId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Service_AppointmentReservationId",
                 table: "Service",
                 column: "AppointmentReservationId");
@@ -95,6 +114,9 @@ namespace BarberConect.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Roles");
+
             migrationBuilder.DropTable(
                 name: "Service");
 

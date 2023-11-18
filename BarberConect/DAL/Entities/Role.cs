@@ -11,6 +11,6 @@ namespace BarberConect.DAL.Entities
         [MaxLength(30)]
         public string RoleName { get; set; }//Varchar(30)
 
-        public Guid UserId { get; set; }//FK
+        //public Guid UserId { get; set; }//FK
     }
 }

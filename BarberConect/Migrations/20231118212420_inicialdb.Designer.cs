@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BarberConect.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20231118194737_iniDb")]
-    partial class iniDb
+    [Migration("20231118212420_inicialdb")]
+    partial class inicialdb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -67,6 +67,27 @@ namespace BarberConect.Migrations
                         .IsUnique();
 
                     b.ToTable("AppointmentReservation");
+                });
+
+            modelBuilder.Entity("BarberConect.DAL.Entities.Role", b =>
+                {
+                    b.Property<int>("RoleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoleId"), 1L, 1);
+
+                    b.Property<string>("RoleName")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.HasKey("RoleId");
+
+                    b.HasIndex("RoleId")
+                        .IsUnique();
+
+                    b.ToTable("Roles");
                 });
 
             modelBuilder.Entity("BarberConect.DAL.Entities.Service", b =>
