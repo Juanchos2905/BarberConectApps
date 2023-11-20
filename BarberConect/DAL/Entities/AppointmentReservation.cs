@@ -25,7 +25,6 @@ namespace BarberConect.DAL.Entities
         [Display(Name = "Id Usuario")]
         public Guid UserId { get; set; }  //FK
 
-        public Guid ServiceId { get; set; } //Fk
         [Display(Name = "Id Servicio")]
         public ICollection<Service>? Services { get; set; } //RC
 

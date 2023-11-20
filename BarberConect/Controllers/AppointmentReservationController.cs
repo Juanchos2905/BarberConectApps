@@ -1,5 +1,6 @@
 ﻿using BarberConect.DAL.Entities;
 using BarberConect.Domain.Interfaces;
+using BarberConect.Domain.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BarberConect.Controllers
@@ -37,6 +38,19 @@ namespace BarberConect.Controllers
 
                 return Conflict(ex.Message);
             }
+        }
+        //GET ROLES
+        [HttpGet, ActionName("Get")]
+        [Route("GetAppointmentReservations")]
+        public async Task<ActionResult<IEnumerable<AppointmentReservation>>> GetAppointmentReservationsAsync()
+        {
+            var AppointmentReservations = await _appointmentReservationService.GetAppointmentReservationsAsync();
+            if (AppointmentReservations == null || !AppointmentReservations.Any())
+            {
+                return NotFound();
+            }
+
+            return Ok(AppointmentReservations);
         }
     }
 }

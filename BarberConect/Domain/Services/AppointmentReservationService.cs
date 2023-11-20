@@ -40,6 +40,16 @@ namespace BarberConect.Domain.Services
             throw new NotImplementedException();
         }
 
+        public Task<IEnumerable<AppointmentReservation>> GetAppointmentReservationByDayAsync(DateTime date)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<IEnumerable<AppointmentReservation>> GetAppointmentReservationsAsync()
+        {
+            return await _context.AppointmentReservations.ToListAsync();
+        }
+
         public Task<AppointmentReservation> UpdateAppointmentReservationAsync(AppointmentReservation appointmentReservation)
         {
             throw new NotImplementedException();

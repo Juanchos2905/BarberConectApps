@@ -16,7 +16,7 @@ namespace BarberConect.Controllers
         }
         //GET SERVICES
         [HttpGet, ActionName("Get")]
-        [Route("GetRoles")]
+        [Route("GetServices")]
         public async Task<ActionResult<IEnumerable<Service>>> GetServicesAsync()
         {
             var services = await _serviceService.GetServicesAsync();
@@ -29,8 +29,8 @@ namespace BarberConect.Controllers
         }
         //GET SERVICE BY ID
         [HttpGet, ActionName("Get")]
-        [Route("GetRolesById")]
-        public async Task<ActionResult<IEnumerable<Service>>> GetServiceByIdAsync(Guid id)
+        [Route("GetServiceById")]
+        public async Task<ActionResult<Service>> GetServiceByIdAsync(Guid id)
         {
             if (id == null) return BadRequest("Id es requerido!");
 

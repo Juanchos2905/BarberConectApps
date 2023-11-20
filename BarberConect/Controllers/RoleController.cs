@@ -30,7 +30,7 @@ namespace BarberConect.Controllers
         //GET ROLE BY ID
         [HttpGet, ActionName("Get")]
         [Route("GetRolesById")]
-        public async Task<ActionResult<IEnumerable<Role>>> GetRoleByIdAsync(int id)
+        public async Task<ActionResult<Role>> GetRoleByIdAsync(int id)
         {
             if (id == null) return BadRequest("Id es requerido!");
 

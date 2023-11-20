@@ -10,10 +10,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 builder.Services.AddDbContext<DataBaseContext>(o => o.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-//
+
 builder.Services.AddScoped<IBarberService, BarberService>();
 builder.Services.AddScoped<IRoleService, RoleService>();
-//builder.Services.AddScoped<IAppointmentReservationService, AppointmentReservationService>();
+builder.Services.AddScoped<IServiceService, ServiceService>();
+builder.Services.AddScoped<ICustomerService, CustomerService>();
+builder.Services.AddScoped<IAppointmentReservationService, AppointmentReservationService>();
+builder.Services.AddTransient<SeederDB>();
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -21,6 +24,19 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+seederData();
+void seederData()
+{
+    IServiceScopeFactory? scopedFactory = app.Services.GetService<IServiceScopeFactory>();
+
+    using (IServiceScope? scope = scopedFactory.CreateScope())
+    {
+        SeederDB? service = scope.ServiceProvider.GetService<SeederDB>();
+        service.SeederAsync().Wait();
+    }
+}
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

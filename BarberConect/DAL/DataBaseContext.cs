@@ -14,8 +14,10 @@ namespace BarberConect.DAL
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<User>().HasIndex(u => u.Id).IsUnique();
             modelBuilder.Entity<Role>().HasIndex(r => r.RoleId).IsUnique();
-            modelBuilder.Entity<AppointmentReservation>().HasIndex("Date", "Time", "AppointmentStatus").IsUnique();
+            modelBuilder.Entity<Service>().HasIndex(s => s.Id).IsUnique();
 
+
+            modelBuilder.Entity<AppointmentReservation>().HasIndex("Date", "Time", "AppointmentStatus").IsUnique();
             ///modelBuilder.Entity<Hotel>().HasIndex(h => h.Name).IsUnique();
             ///modelBuilder.Entity<Room>().HasIndex("Number", "HotelId").IsUnique();
 
