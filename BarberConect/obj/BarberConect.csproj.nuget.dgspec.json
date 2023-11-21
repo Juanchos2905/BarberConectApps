@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\BarberConect18-11\\BarberConectApps\\BarberConect\\BarberConect.csproj": {}
+    "C:\\BarberConect20-11\\BarberConectApps\\BarberConect\\BarberConect.csproj": {}
   },
   "projects": {
-    "C:\\BarberConect18-11\\BarberConectApps\\BarberConect\\BarberConect.csproj": {
+    "C:\\BarberConect20-11\\BarberConectApps\\BarberConect\\BarberConect.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\BarberConect18-11\\BarberConectApps\\BarberConect\\BarberConect.csproj",
+        "projectUniqueName": "C:\\BarberConect20-11\\BarberConectApps\\BarberConect\\BarberConect.csproj",
         "projectName": "BarberConect",
-        "projectPath": "C:\\BarberConect18-11\\BarberConectApps\\BarberConect\\BarberConect.csproj",
+        "projectPath": "C:\\BarberConect20-11\\BarberConectApps\\BarberConect\\BarberConect.csproj",
         "packagesPath": "C:\\Users\\juanc\\.nuget\\packages\\",
-        "outputPath": "C:\\BarberConect18-11\\BarberConectApps\\BarberConect\\obj\\",
+        "outputPath": "C:\\BarberConect20-11\\BarberConectApps\\BarberConect\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -7,7 +7,7 @@ namespace BarberConect.Domain.Interfaces
         Task<AppointmentReservation> CreateAppointmentReservationAsync(AppointmentReservation appointmentReservation, Guid userId);
         Task<IEnumerable<AppointmentReservation>> GetAppointmentReservationsAsync();
         Task<IEnumerable <AppointmentReservation>> GetAppointmentReservationByDayAsync(DateTime date);
-        Task<AppointmentReservation> UpdateAppointmentReservationAsync(AppointmentReservation appointmentReservation); //Cancelar cita
-        Task<AppointmentReservation> ValidateAppointmentReservationAsync(DateTime date, string time, string AppointmentStatus);
+        Task<AppointmentReservation> UpdateAppointmentReservationAsync(Guid id); //Cancelar cita
+        Task<AppointmentReservation> ValidateAppointmentReservationAsync(DateTime date, string time);
     }
 }

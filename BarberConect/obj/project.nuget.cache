@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7P5yGB6trU4GOqUAcuaLPE1S+CqBJ9mR3AQkn6a3TkoVqk0Wp2cTHcsZj3bVQDnX5z+omKBiCJUIKkQwnX+dLg==",
+  "dgSpecHash": "UgdhJ3CHMSbfukslEawZeeRUo76YQnzr50sQ7H1sJtzT0hjPSdFo2iQ7CsRVr695xt9a/3VgsFswC39ZSLE9ug==",
   "success": true,
-  "projectFilePath": "C:\\BarberConect18-11\\BarberConectApps\\BarberConect\\BarberConect.csproj",
+  "projectFilePath": "C:\\BarberConect20-11\\BarberConectApps\\BarberConect\\BarberConect.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\juanc\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\juanc\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",

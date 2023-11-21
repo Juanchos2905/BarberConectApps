@@ -21,8 +21,10 @@ namespace BarberConect.Domain.Services
                 appointmentReservation.Id = Guid.NewGuid();
                 appointmentReservation.CreateDate = DateTime.Now;
                 appointmentReservation.UserId = userId;
+                appointmentReservation.AppointmentStatus = "Confirmado";
                 //appointmentReservation. = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
                 appointmentReservation.ModifiedDate = null;
+
 
                 _context.AppointmentReservations.Add(appointmentReservation);
                 await _context.SaveChangesAsync();
@@ -35,29 +37,64 @@ namespace BarberConect.Domain.Services
             }
         }
 
-        public Task<AppointmentReservation> DeleteAppointmentReservationAsync(Guid id)
-        {
-            throw new NotImplementedException();
-        }
 
-        public Task<IEnumerable<AppointmentReservation>> GetAppointmentReservationByDayAsync(DateTime date)
+        public async Task<IEnumerable<AppointmentReservation>> GetAppointmentReservationByDayAsync(DateTime date)
         {
-            throw new NotImplementedException();
+            string dt = date.ToString("yyyy-MM-dd");
+            string day = dt + "T00:00:00";
+            return await _context.AppointmentReservations
+                .Where(a => a.Date == DateTime.Parse(day))
+                .Include(s => s.Services)
+                .ToListAsync();
         }
 
         public async Task<IEnumerable<AppointmentReservation>> GetAppointmentReservationsAsync()
         {
-            return await _context.AppointmentReservations.ToListAsync();
+            return await _context.AppointmentReservations
+                .Include(s => s.Services)
+                .ToListAsync();
         }
 
-        public Task<AppointmentReservation> UpdateAppointmentReservationAsync(AppointmentReservation appointmentReservation)
+        public async Task<AppointmentReservation> UpdateAppointmentReservationAsync(Guid id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var CancelAppointment = await _context.AppointmentReservations
+                    .FirstOrDefaultAsync(i => i.Id == id);
+
+                if (CancelAppointment == null)
+                {
+                    throw new InvalidOperationException("AppointmentReservation not found");
+                }
+
+
+                if (CancelAppointment.AppointmentStatus == "Confirmado")
+                {
+                    CancelAppointment.AppointmentStatus = "Cancelado";
+                    CancelAppointment.ModifiedDate = DateTime.Now;
+                    _context.AppointmentReservations.Update(CancelAppointment);
+                    await _context.SaveChangesAsync();
+                    return CancelAppointment;
+
+                }
+                else
+                {
+                    throw new Exception("AppointmentReservation is already canceled.");
+                }
+
+            }
+            catch (DbUpdateException dbUpdateException)
+            {
+                throw new Exception(dbUpdateException.InnerException?.Message ?? dbUpdateException.Message);
+            }
         }
 
-        public Task<AppointmentReservation> ValidateAppointmentReservationAsync(DateTime date, string time, string AppointmentStatus)
+        public async Task<AppointmentReservation> ValidateAppointmentReservationAsync(DateTime date, string time)
         {
-            throw new NotImplementedException();
+            string dt = date.ToString("yyyy-MM-dd");
+            string day = dt + "T00:00:00";
+            return await _context.AppointmentReservations
+                .FirstOrDefaultAsync(a => a.Date == DateTime.Parse(day) && a.Time == time);
         }
     }
 }
