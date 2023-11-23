@@ -20,9 +20,17 @@ namespace BarberConect.Domain.Services
             {
                 barber.Id = Guid.NewGuid();
                 barber.CreateDate = DateTime.Now;
-                _context.Users.Add(barber);
-                await _context.SaveChangesAsync();
-                return barber;
+                barber.RoleId = 1;
+                if (barber.Age > 0 && barber.Age <= 100)
+                {
+                    _context.Users.Add(barber);
+                    await _context.SaveChangesAsync();
+                    return barber;
+                }
+                else
+                {
+                    return null;
+                }
             }
             catch (DbUpdateException dbUpdateException)
             {
@@ -54,10 +62,17 @@ namespace BarberConect.Domain.Services
             try
             {
                 barber.ModifiedDate = DateTime.Now;
-
-                _context.Users.Update(barber);
-                await _context.SaveChangesAsync();
-                return barber;
+                barber.RoleId = 1;
+                if (barber.Age > 0 && barber.Age <= 100)
+                {
+                    _context.Users.Update(barber);
+                    await _context.SaveChangesAsync();
+                    return barber;
+                }
+                else
+                {
+                    return null;
+                }
             }
             catch (DbUpdateException dbUpdateException)
             {

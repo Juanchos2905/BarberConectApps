@@ -38,9 +38,13 @@ namespace BarberConect.Controllers
                 var createBarber = await _barberService.CreateBarberAsync(barber);
                 if (createBarber == null)
                 {
-                    return NotFound();
+                    return NotFound("Verifique la informacion suministrada");
                 }
-                return Ok(createBarber);
+                if (createBarber.Age > 0 && createBarber.Age <= 100)
+                {
+                    return Ok(createBarber);
+                }
+                return Conflict(String.Format("Verifique que la informacion suministrada sea correcta"));
             }
             catch (Exception ex)
             {
@@ -74,8 +78,15 @@ namespace BarberConect.Controllers
             try
             {
                 var editedBarber = await _barberService.EditBarberAsync(barber);
-                return Ok(editedBarber);
-
+                if (editedBarber == null)
+                {
+                    return NotFound("Verifique la informacion suministrada");
+                }
+                if (editedBarber.Age > 0 && editedBarber.Age <= 100)
+                {
+                    return Ok(editedBarber);
+                }
+                return Conflict(String.Format("Verifique que la informacion suministrada sea correcta"));
             }
             catch (Exception ex)
             {

@@ -2,6 +2,7 @@
 using BarberConect.DAL;
 using BarberConect.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System.Threading;
 
 namespace BarberConect.Domain.Services
 {
@@ -20,9 +21,17 @@ namespace BarberConect.Domain.Services
             {
                 customer.Id = Guid.NewGuid();
                 customer.CreateDate = DateTime.Now;
-                _context.Users.Add(customer);
-                await _context.SaveChangesAsync();
-                return customer;
+                customer.RoleId = 2;
+                if (customer.Age > 0 && customer.Age <= 100)
+                {
+                    _context.Users.Add(customer);
+                    await _context.SaveChangesAsync();
+                    return customer;
+                }
+                else
+                {
+                    return null;
+                }
             }
             catch (DbUpdateException dbUpdateException)
             {
@@ -54,10 +63,17 @@ namespace BarberConect.Domain.Services
             try
             {
                 customer.ModifiedDate = DateTime.Now;
-
-                _context.Users.Update(customer);
-                await _context.SaveChangesAsync();
-                return customer;
+                customer.RoleId = 2;
+                if (customer.Age > 0 && customer.Age <= 100)
+                {
+                    _context.Users.Update(customer);
+                    await _context.SaveChangesAsync();
+                    return customer;
+                }
+                else
+                {
+                    return null;
+                }
             }
             catch (DbUpdateException dbUpdateException)
             {

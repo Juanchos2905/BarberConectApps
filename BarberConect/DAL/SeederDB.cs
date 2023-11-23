@@ -48,7 +48,6 @@ namespace BarberConect.DAL
                 {
                     Name = "Andres",
                     LastName = "Velez",
-                    Role = 1,
                     Email = "AV@gmail.com",
                     Password = "1234",
                     Age = 35,
@@ -64,7 +63,6 @@ namespace BarberConect.DAL
                 {
                     Name = "Eurelio",
                     LastName = "Rodriguez",
-                    Role = 1,
                     Email = "Eu@gmail.com",
                     Password = "1234",
                     Age = 20,
@@ -80,7 +78,6 @@ namespace BarberConect.DAL
                 {
                     Name = "Juan",
                     LastName = "Valencia",
-                    Role = 2,
                     Email = "JValencia@gmail.com",
                     Password = "2222",
                     Age = 20,
@@ -96,7 +93,6 @@ namespace BarberConect.DAL
                 {
                     Name = "Alex",
                     LastName = "Soto",
-                    Role = 2,
                     Email = "ALSoto@gmail.com",
                     Password = "1111",
                     Age = 19,

@@ -39,9 +39,14 @@ namespace BarberConect.Controllers
                 var createCustomer = await _customerService.CreateCustomerAsync(customer);
                 if (createCustomer == null)
                 {
-                    return NotFound();
+                    return NotFound("Verifique la informacion suministrada");
                 }
-                return Ok(createCustomer);
+                if (createCustomer.Age > 0 && createCustomer.Age <= 100)
+                {
+                    return Ok(createCustomer);
+                }
+                return Conflict(String.Format("Verifique que la informacion suministrada sea correcta"));
+                
             }
             catch (Exception ex)
             {
@@ -68,6 +73,34 @@ namespace BarberConect.Controllers
 
             return Ok(deletedCustomer);
         }
-
+        //EDIT CUSTOMER 
+        [HttpPut, ActionName("Edit")]
+        [Route("EditCustomer")]
+        public async Task<ActionResult<User>> EditCustomerAsync(User customer)
+        {
+            try
+            {
+                //Validar que no se cambie el rol
+                var editCustomer = await _customerService.EditCustomerAsync(customer);
+                if (editCustomer == null)
+                {
+                    return NotFound("Verifique la informacion suministrada");
+                }
+                if (editCustomer.Age > 0 && editCustomer.Age <= 100)
+                {
+                    return Ok(editCustomer);
+                }
+                return Conflict(String.Format("Verifique que la informacion suministrada sea correcta"));
+                
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message.Contains("duplicate"))
+                {
+                    return Conflict(String.Format("El Usuario {0} ya existe "));
+                }
+                return Conflict(ex.Message);
+            }
+        }
     }
 }

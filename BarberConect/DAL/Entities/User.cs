@@ -12,8 +12,8 @@ namespace BarberConect.DAL.Entities
         [MaxLength(50)]
         public string? LastName { get; set; }
 
-        [Required]
-        public int Role { get; set; }
+        //[Required]
+        //public int Role { get; set; }
 
         [Required]
         [MaxLength(50, ErrorMessage = "El campo {0} debe tener maximo{1} caracter")]
