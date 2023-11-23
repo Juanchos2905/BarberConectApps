@@ -6,6 +6,6 @@
     "\\BarberConect\\DAL",
     "\\BarberConect\\DAL\\Entities"
   ],
-  "SelectedNode": "\\BarberConect\\BarberConect.sln",
+  "SelectedNode": "\\BarberConect\\Controllers\\AppointmentReservationController.cs",
   "PreviewInSolutionExplorer": false
 }

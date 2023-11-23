@@ -30,16 +30,42 @@ namespace BarberConect.Domain.Services
             }
         }
 
-        public Task<User> DeleteCustomerAsync(Guid id)
+        public async Task<User> DeleteCustomerAsync(Guid id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var customer = await _context.Users
+                    .FirstOrDefaultAsync(c => c.Id == id && c.RoleId == 2);
+                if (customer == null) return null; // If the barber doesn't exists, it would return null.
+
+                _context.Users.Remove(customer);
+                await _context.SaveChangesAsync();
+
+                return customer;
+            }
+            catch (DbUpdateException dbUpdateException)
+            {
+                throw new Exception(dbUpdateException.InnerException?.Message ?? dbUpdateException.Message);
+            }
         }
 
-        public Task<User> EditCustomerAsync(User barber)
+        public async Task<User> EditCustomerAsync(User customer)
         {
-            throw new NotImplementedException();
+            try
+            {
+                customer.ModifiedDate = DateTime.Now;
+
+                _context.Users.Update(customer);
+                await _context.SaveChangesAsync();
+                return customer;
+            }
+            catch (DbUpdateException dbUpdateException)
+            {
+                throw new Exception(dbUpdateException.InnerException?.Message ?? dbUpdateException.Message);
+            }
         }
 
+        //Solo sirve para el futuro...
         public Task<User> GetCustomerByIdAsync(Guid id)
         {
             throw new NotImplementedException();

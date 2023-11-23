@@ -51,6 +51,40 @@ namespace BarberConect.Controllers
                 return Conflict(ex.Message);
             }
         }
+        //DELETE BARBER
+        [HttpDelete, ActionName("Delete")]
+        [Route("DeleteBarber")]
+        public async Task<ActionResult<User>> DeleteBarberAsync(Guid id)
+        {
+            if (id == null) return BadRequest("El id del barbero es requerido!");
 
+            var deletedBarber = await _barberService.DeleteBarberAsync(id);
+            if (deletedBarber == null)
+            {
+                return NotFound("Barbero no encontrado.");
+            }
+
+            return Ok(deletedBarber);
+        }
+        //UPDATE BARBER
+        [HttpPut, ActionName("Update")]
+        [Route("UpdaterBarber")]
+        public async Task<ActionResult<User>> EditBarberAsync(User barber)
+        {
+            try
+            {
+                var editedBarber = await _barberService.EditBarberAsync(barber);
+                return Ok(editedBarber);
+
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message.Contains("canceled"))
+                    return Conflict(String.Format("La cita ya ha sido cancelada."));
+
+                return Conflict(ex.Message);
+            }
+
+        }
     }
 }

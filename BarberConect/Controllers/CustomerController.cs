@@ -1,5 +1,6 @@
 ﻿using BarberConect.DAL.Entities;
 using BarberConect.Domain.Interfaces;
+using BarberConect.Domain.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading;
 
@@ -50,6 +51,22 @@ namespace BarberConect.Controllers
                 }
                 return Conflict(ex.Message);
             }
+        }
+
+        //DELETE CUSTOMER
+        [HttpDelete, ActionName("Delete")]
+        [Route("DeleteCustomer")]
+        public async Task<ActionResult<User>> DeleteCustomerAsync(Guid id)
+        {
+            if (id == null) return BadRequest("El id del cliente es requerido!");
+
+            var deletedCustomer = await _customerService.DeleteCustomerAsync(id);
+            if (deletedCustomer == null)
+            {
+                return NotFound("Cliente no encontrado.");
+            }
+
+            return Ok(deletedCustomer);
         }
 
     }
