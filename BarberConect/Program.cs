@@ -20,6 +20,7 @@ builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<IServiceService, ServiceService>();
 builder.Services.AddScoped<ICustomerService, CustomerService>();
 builder.Services.AddScoped<IAppointmentReservationService, AppointmentReservationService>();
+builder.Services.AddScoped<ILoginService, LoginService>();
 builder.Services.AddTransient<SeederDB>();
 
 
