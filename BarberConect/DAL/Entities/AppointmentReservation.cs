@@ -6,26 +6,27 @@ namespace BarberConect.DAL.Entities
     {
         [Display(Name = "FechaCita")]
         [Required]
-        public DateTime Date { get; set; } //Date
+        public string Date { get; set; } //Date
         [Display(Name = "HoraCita")]
-        [MaxLength(50, ErrorMessage = "El campo {0} debe tener máximo {1} caracteres")]
+        [MaxLength(2, ErrorMessage = "El campo {0} debe tener máximo {1} caracteres")]
         [Required]
         public string Time { get; set; } //Time
         [Display(Name = "EstadoCita")]
         [MaxLength(20)]
         public string AppointmentStatus { get; set; }// Varchar(20)
-        [Display(Name = "TiempoCita")]
+        /*[Display(Name = "TiempoCita")]
         public int? TotalMinutes { get; set; }
         [Display(Name = "TotalPagar")]
         [Required]
-        public double TotalRate { get; set; }
+        public double TotalRate { get; set; }*/
 
-
+        [Display(Name = "Usuario")]
+        public User? User { get; set; }
 
         [Display(Name = "Id Usuario")]
         public Guid UserId { get; set; }  //FK
 
-        [Display(Name = "Id Servicio")]
+        [Display(Name = "Servicios")]
         public ICollection<Service>? Services { get; set; } //RC
 
     }

@@ -33,9 +33,13 @@ namespace BarberConect.DAL.Entities
         [MaxLength(100)]
         public string? Skill { get; set; }
 
-
-        public Guid? AppointmentReservationId { get; set; } //FK
         public int RoleId { get; set; } //FK
+
+        [Display(Name = "Cita")]
+        public AppointmentReservation? AppointmentReservations { get; set; }//OBJ 
+
+        [Display(Name = "Id Cita")]
+        public Guid? AppointmentReservationId { get; set; } //FK
 
     }
 }

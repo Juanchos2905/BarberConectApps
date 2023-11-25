@@ -20,16 +20,30 @@ namespace BarberConect.Domain.Services
             {
                 appointmentReservation.Id = Guid.NewGuid();
                 appointmentReservation.CreateDate = DateTime.Now;
-                appointmentReservation.UserId = userId;
+                appointmentReservation.ModifiedDate = null;
                 appointmentReservation.AppointmentStatus = "Confirmado";
-                //appointmentReservation. = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+                appointmentReservation.UserId = userId;
+                appointmentReservation.User = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
                 appointmentReservation.ModifiedDate = null;
 
+                int tiempo = int.Parse(appointmentReservation.Time);
 
-                _context.AppointmentReservations.Add(appointmentReservation);
-                await _context.SaveChangesAsync();
 
-                return appointmentReservation;
+                if(tiempo <= 21  && tiempo >= 09 )
+                {
+                    appointmentReservation.User.AppointmentReservationId = appointmentReservation.Id;
+                    _context.AppointmentReservations.Add(appointmentReservation);
+                    await _context.SaveChangesAsync();
+                    return appointmentReservation;
+                }
+                else
+                {
+                    throw new Exception("Verifique que la informacion");
+                }
+
+
+
+               
             }
             catch (DbUpdateException dbUpdateException)
             {
@@ -38,12 +52,9 @@ namespace BarberConect.Domain.Services
         }
 
 
-        public async Task<IEnumerable<AppointmentReservation>> GetAppointmentReservationByDayAsync(DateTime date)
+        public async Task<IEnumerable<AppointmentReservation>> GetAppointmentReservationByDayAsync(string date)
         {
-            string dt = date.ToString("yyyy-MM-dd");
-            string day = dt + "T00:00:00";
             return await _context.AppointmentReservations
-                .Where(a => a.Date == DateTime.Parse(day))
                 .Include(s => s.Services)
                 .ToListAsync();
         }
@@ -89,12 +100,10 @@ namespace BarberConect.Domain.Services
             }
         }
 
-        public async Task<AppointmentReservation> ValidateAppointmentReservationAsync(DateTime date, string time)
+        public async Task<AppointmentReservation> ValidateAppointmentReservationAsync(string date, string time)
         {
-            string dt = date.ToString("yyyy-MM-dd");
-            string day = dt + "T00:00:00";
             return await _context.AppointmentReservations
-                .FirstOrDefaultAsync(a => a.Date == DateTime.Parse(day) && a.Time == time);
+                .FirstOrDefaultAsync(a => a.Date == date && a.Time == time);
         }
     }
 }

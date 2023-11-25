@@ -83,8 +83,8 @@ namespace BarberConect.DAL
                     Age = 20,
                     Phone = "3002036809",
                     Skill = null,
-                    AppointmentReservationId = null,
                     RoleId = 2,
+                    AppointmentReservationId = null,
                     ModifiedDate = null,
                     CreateDate = DateTime.Now
                 });
@@ -98,8 +98,36 @@ namespace BarberConect.DAL
                     Age = 19,
                     Phone = "3135456320",
                     Skill = null,
-                    AppointmentReservationId = null,
                     RoleId = 2,
+                    AppointmentReservations = new AppointmentReservation()
+                    {
+                        CreateDate = DateTime.Now,
+                        ModifiedDate = null,
+                        Date = DateTime.Now.ToString("yyyy-MM-dd"),
+                        Time = "18",
+                        AppointmentStatus = "Confirmado",
+                        Services = new List<Service>()
+                        {
+                            new Service
+                            {
+                                CreateDate = DateTime.Now,
+                                ModifiedDate = null,
+                                BarberService = "Pigmentación de barba",
+                                Rate = 8000,
+                                Minutes = 45,
+                            },
+
+                            new Service
+                            {
+                                CreateDate = DateTime.Now,
+                                ModifiedDate = null,
+                                BarberService = "Corte militar",
+                                Rate = 12000,
+                                Minutes = 10,
+                            }
+
+                        }
+                    },
                     ModifiedDate = null,
                     CreateDate = DateTime.Now
                 });

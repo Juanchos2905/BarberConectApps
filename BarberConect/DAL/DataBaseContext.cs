@@ -18,8 +18,11 @@ namespace BarberConect.DAL
 
 
             modelBuilder.Entity<AppointmentReservation>().HasIndex("Date", "Time", "AppointmentStatus").IsUnique();
-            ///modelBuilder.Entity<Hotel>().HasIndex(h => h.Name).IsUnique();
-            ///modelBuilder.Entity<Room>().HasIndex("Number", "HotelId").IsUnique();
+            modelBuilder.Entity<AppointmentReservation>()
+                .HasOne(ar => ar.User)
+                .WithOne(u => u.AppointmentReservations)
+                .HasForeignKey<AppointmentReservation>(ar => ar.UserId);
+
 
         }
         //DBset!
