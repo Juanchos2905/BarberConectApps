@@ -12,6 +12,25 @@ namespace BarberConect.Domain.Services
         {
             _context = context;
         }
+
+        public async Task<Service> CreateServiceAsync(Service service, Guid appointmentReservationId)
+        {
+            try
+            {
+                service.Id = Guid.NewGuid();
+                service.CreateDate = DateTime.Now;
+                service.AppointmentReservationId = appointmentReservationId;
+                service.ModifiedDate = null;
+                _context.Services.Add(service);
+                await _context.SaveChangesAsync();
+                return service;
+            }
+            catch (DbUpdateException dbUpdateException)
+            {
+                throw new Exception(dbUpdateException.InnerException?.Message ?? dbUpdateException.Message);
+            }
+        }
+
         public async Task<Service> GetServiceByIdAsync(Guid id)
         {
             return await _context.Services.FirstOrDefaultAsync(s => s.Id == id);

@@ -55,6 +55,7 @@ namespace BarberConect.Domain.Services
         public async Task<IEnumerable<AppointmentReservation>> GetAppointmentReservationByDayAsync(string date)
         {
             return await _context.AppointmentReservations
+                .Where(a => a.Date == date)
                 .Include(s => s.Services)
                 .ToListAsync();
         }
@@ -103,7 +104,7 @@ namespace BarberConect.Domain.Services
         public async Task<AppointmentReservation> ValidateAppointmentReservationAsync(string date, string time)
         {
             return await _context.AppointmentReservations
-                .FirstOrDefaultAsync(a => a.Date == date && a.Time == time);
+                .FirstOrDefaultAsync(a => a.Date == date && a.Time == time && a.AppointmentStatus == "Confirmado");
         }
     }
 }

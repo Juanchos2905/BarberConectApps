@@ -14,6 +14,29 @@ namespace BarberConect.Controllers
         {
             _serviceService = serviceService;
         }
+        //CREATE SERVICES
+        [HttpPost, ActionName("Create")]
+        [Route("CreateService")]
+        public async Task<ActionResult> CreateServiceAsync(Service service, Guid appointmentReservationId)
+        {
+            try
+            {
+                var createService = await _serviceService.CreateServiceAsync(service, appointmentReservationId);
+                if (createService == null)
+                {
+                    return NotFound("Verifique la informacion suministrada");
+                }
+                return Ok(createService);
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message.Contains("duplicate"))
+                {
+                    return Conflict(String.Format("El Servicio {0} ya existe ", service.Id));
+                }
+                return Conflict(ex.Message);
+            }
+        }
         //GET SERVICES
         [HttpGet, ActionName("Get")]
         [Route("GetServices")]
